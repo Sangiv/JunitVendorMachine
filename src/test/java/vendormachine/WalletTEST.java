@@ -1,10 +1,18 @@
 package vendormachine;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+
+import vendormachine.users.testReport;
 import vendormachine.users.util.Wallet;
 
 public class WalletTEST {
@@ -12,15 +20,27 @@ public class WalletTEST {
 	static Wallet wallet;
 	static double delta = 0.01;
 	
+	private static ExtentReports report;
+	private static ExtentTest test;
+	
+	@BeforeClass
+	public static void start() {
+		report = new ExtentReports("C:\\Users\\USER\\Desktop\\JunitVendorMachine\\target\\reports\\html\\WalletTEST.html");
+	}
+	
 	@Before
 	public void init() {
 		wallet = new Wallet("Gucci", 300.95f);
 	}
 	@Test
 	public void emptyconstructorTest() {
+		test = report.startTest("emptyconstructorTest");
+		
 		Wallet nonWallet = new Wallet();
-		assertEquals("Generic", nonWallet.getBrand());
-		assertEquals(0.5f, nonWallet.getAllCredit(), delta);
+//		assertEquals("Generic", nonWallet.getBrand());
+//		assertEquals(0.5f, nonWallet.getAllCredit(), delta);
+		testReport.assertReport(test, true, nonWallet instanceof Wallet);
+		assertTrue(nonWallet instanceof Wallet);
 	}
 	@Test
 	public void constructorTest() {
@@ -64,6 +84,16 @@ public class WalletTEST {
 		assertEquals("Armani", wallet.getBrand());
 	}
 	
+	@After
+	public void close() {
+		report.endTest(test);
+	}
+	
+	@AfterClass
+	public static void cleanup() {
+		report.flush();
+		report.close();
+	}
 	/** 
 	 * Task 1:
 	 * 	Objective:
