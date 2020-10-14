@@ -41,7 +41,7 @@ public class DrinkVendingMachine {
 
     // This is how we'll select our "snack" from the array
     public Snack selectDrink(int arrayPosition){
-        if(arrayPosition >=  drinkList.size() || arrayPosition > 0) {
+        if(arrayPosition <=  drinkList.size() && arrayPosition >= 0) {
             Snack selection = drinkList.get(arrayPosition);
 
             if(this.availableCredit < selection.cost()){
@@ -63,19 +63,29 @@ public class DrinkVendingMachine {
         }
     }
 
-    public void giveCredit(Person user, float credit){
+    public float giveCredit(Person user, float credit){
         //TODO replace with Log4j
         System.out.println("INFO: You have entered £"+credit);
         this.availableCredit += user.getCredit(credit);
+        return this.availableCredit;
     }
+
 
     //===============================
     //===  'get'ors
     //===============================
 
+	public BRANDS getBrandName() {
+		return brandName;
+	}
 
+	public float getAvailableCredit() {
+		return availableCredit;
+	}
+
+	
     //===============================
     //===  'set'ors
     //===============================
-
+	
 }
