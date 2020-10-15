@@ -44,7 +44,12 @@ public class WalletTEST {
 	}
 	@Test
 	public void constructorTest() {
+		test = report.startTest("construcorTest");
+		
 		Wallet startWallet = new Wallet(200.0f);
+		
+		testReport.assertReport(test, 200.0f, startWallet.getAllCredit());
+		testReport.assertReport(test, "Generic", startWallet.getBrand());
 		assertEquals(200.0f, startWallet.getAllCredit(), delta);
 		assertEquals("Generic", startWallet.getBrand());
 	}

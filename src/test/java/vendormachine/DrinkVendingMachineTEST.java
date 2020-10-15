@@ -51,13 +51,6 @@ public class DrinkVendingMachineTEST {
 		assertNull(drinkE.selectDrink(1));
 	}
 	
-	@Test
-	public void giveCreditTest() {
-		Wallet wallet = new Wallet(20.0f);
-		Person user = new Person("gio", wallet);
-		
-		assertEquals(13.45f, drink.giveCredit(user, 6.55f), 0.01f);
-	}
 	/** 
 	 * Task 2:
 	 * 	Objective:
